@@ -30,7 +30,7 @@ Resource Limits
  kubectl apply -f deployment-test-limit.yml
 
 
-#### check 
+#### check deployment status
 kubectl get deployment staging-app-test -o yaml -n staging-zeus
 ```
  - lastTransitionTime: "2020-06-25T03:15:19Z"
