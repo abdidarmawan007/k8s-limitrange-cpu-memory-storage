@@ -1,0 +1,48 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: staging-app-test
+  namespace: staging-zeus
+spec:
+  replicas: 1
+  revisionHistoryLimit: 4
+  minReadySeconds: 10
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+     maxUnavailable: 0
+     maxSurge: 50%
+  template:
+    metadata:
+      labels:
+        app: staging-app-test
+        env: staging
+    spec:
+      containers:
+      - name: staging-app-test
+        image: nginxdemos/hello
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 80
+        resources:
+            limits:
+               cpu: "950m"
+               memory: "1200Mi"
+        # health checks self healing check port 80 response 200,
+        # if containers error (400-500) kubernetes restart the pod
+        readinessProbe:
+          httpGet:
+            path: /
+            port: 80
+          initialDelaySeconds: 5
+          periodSeconds: 5
+        livenessProbe:
+           httpGet:
+             path: /
+             port: 80
+           initialDelaySeconds: 5
+           periodSeconds: 5
+        lifecycle: # (real) zero-downtime for rolling deployment
+          preStop:
+            exec:
+              command: ["sh", "-c", "sleep 8"]    
