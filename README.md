@@ -2,15 +2,15 @@
 
 
 
-#### create namespace staging-zeus
+### create namespace staging-zeus
 
 kubectl apply -f namespace.yml
 
-#### apply limit for namespace staging-zeus
+### apply limit for namespace staging-zeus
 kubectl apply -f limitrange.yml
 
 
-#### check limit in namespace staging-zeus
+### check limit in namespace staging-zeus
 kubectl describe namespaces staging-zeus
 ```
 Name:         staging-zeus
@@ -25,12 +25,12 @@ Resource Limits
 ```
 
 
-#### test deploy container with over limit cpu and ram
+### test deploy container with over limit cpu and ram
 
  kubectl apply -f deployment-test-limit.yml
 
 
-#### check deployment status
+### check deployment status
 kubectl get deployment staging-app-test -o yaml -n staging-zeus
 ```
  - lastTransitionTime: "2020-06-25T03:15:19Z"
