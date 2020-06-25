@@ -19,7 +19,6 @@ Annotations:  Status:  Active
 
 Resource Limits
  Type                   Resource  Min    Max   Default Request  Default Limit  Max Limit/Request Ratio
- ----                   --------  ---    ---   ---------------  -------------  -----------------------
  Container              cpu       100m   800m  200m             200m           -
  Container              memory    100Mi  1Gi   200Mi            200Mi          -
  PersistentVolumeClaim  storage   1Gi    5Gi   -                -              -
